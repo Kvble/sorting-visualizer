@@ -1,0 +1,16 @@
+D:\Projects\Github\SortingVisualizer\SortingVisualizer\bin\Debug\SortingVisualizer.exe.config
+D:\Projects\Github\SortingVisualizer\SortingVisualizer\bin\Debug\SortingVisualizer.exe
+D:\Projects\Github\SortingVisualizer\SortingVisualizer\bin\Debug\SortingVisualizer.pdb
+D:\Projects\Github\SortingVisualizer\SortingVisualizer\obj\Debug\SortingVisualizer.csproj.AssemblyReference.cache
+D:\Projects\Github\SortingVisualizer\SortingVisualizer\obj\Debug\SortingVisualizer.Properties.Resources.resources
+D:\Projects\Github\SortingVisualizer\SortingVisualizer\obj\Debug\SortingVisualizer.csproj.GenerateResource.cache
+D:\Projects\Github\SortingVisualizer\SortingVisualizer\obj\Debug\SortingVisualizer.csproj.CoreCompileInputs.cache
+D:\Projects\Github\SortingVisualizer\SortingVisualizer\obj\Debug\SortingVisualizer.exe
+D:\Projects\Github\SortingVisualizer\SortingVisualizer\obj\Debug\SortingVisualizer.pdb
+D:\Projects\Github\SortingVisualizer\SortingVisualizer\obj\Debug\SortingVisualizer.FrmMain.resources
+D:\Projects\Github\SortingVisualizer\SortingVisualizer\bin\Debug\System.Buffers.dll
+D:\Projects\Github\SortingVisualizer\SortingVisualizer\bin\Debug\System.Memory.dll
+D:\Projects\Github\SortingVisualizer\SortingVisualizer\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\Projects\Github\SortingVisualizer\SortingVisualizer\bin\Debug\System.Buffers.xml
+D:\Projects\Github\SortingVisualizer\SortingVisualizer\bin\Debug\System.Memory.xml
+D:\Projects\Github\SortingVisualizer\SortingVisualizer\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
