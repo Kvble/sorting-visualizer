@@ -13,7 +13,10 @@ namespace SortingVisualizer
 {
     public partial class FrmMain : Form
     {
-        private int[] heights;
+        Height[] heights;
+        Graphics graphics;
+        int maxHeight;
+
         public FrmMain()
         {
             InitializeComponent();
@@ -27,24 +30,50 @@ namespace SortingVisualizer
 
         private void btnGenerateArray_Click(object sender, EventArgs e)
         {
-            Random rnd = new Random();
-            Canvas canvas = new Canvas();
-            this.heights = new int[0];
-            canvas.clearCanvas(pnlCanvas);
-            canvas.drawAllElements(pnlCanvas, ref this.heights);
+            graphics = pnlCanvas.CreateGraphics();
+            int maxEntities = pnlCanvas.Width / 5;
+            maxHeight = pnlCanvas.Height;
+            this.heights = new Height[maxEntities];
+
+            Canvas canvas = new Canvas(pnlCanvas);
+            canvas.clearCanvas(pnlCanvas.Width, pnlCanvas.Height);
+
+            Random rand = new Random();
+            for (int i = 0; i < maxEntities; i++)
+            {
+                int randValue = rand.Next(0, maxHeight);
+                this.heights[i] = new Height(i, randValue);
+                graphics.FillRectangle(new SolidBrush(Color.Black), i * 5, maxHeight - randValue, 5, maxHeight);
+                graphics.DrawRectangle(new Pen(Color.White, 1), i * 5, maxHeight - randValue, 5, maxHeight);
+            }
+            printValues();
+        }
+
+        private void printValues()
+        {
+            string str = "";
+            for (int i = 0; i < heights.Length; i++)
+            {
+                str += heights[i].Value + " ";
+            }
+            Console.WriteLine(str);
         }
 
         private void btnMergeSort_Click(object sender, EventArgs e)
         {
-            Canvas canvas = new Canvas();
-            Span<int> unsorted = this.heights;
+            MergeSort merge = new MergeSort(graphics, maxHeight);
+            var thread = new Thread(() =>
+            {
+                Height[] sorted = new Height[this.heights.Length];
+                sorted = merge.MergeSortHelper(this.heights);
+                printValues();
+            });
+            thread.Start();
+        }
 
-            MergeSort.MergeSortHelper(ref unsorted, ref unsorted, pnlCanvas);
-
-            
-            canvas.clearCanvas(pnlCanvas);
-            canvas.redrawAllElements(pnlCanvas, unsorted.ToArray());
-            
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
