@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using SortingVisualizer.Utility;
 
 namespace SortingVisualizer
 {
@@ -30,23 +31,24 @@ namespace SortingVisualizer
 
         private void btnGenerateArray_Click(object sender, EventArgs e)
         {
-            graphics = pnlCanvas.CreateGraphics();
-            int maxEntities = pnlCanvas.Width / 5;
-            maxHeight = pnlCanvas.Height;
+            Global.Graphics = pnlCanvas.CreateGraphics();
+            Global.MaxHeight = pnlCanvas.Height;
+            Global.Width = 5;
+            Global.Canvas = new Canvas(pnlCanvas);
+            int maxEntities = pnlCanvas.Width / Global.Width;
             this.heights = new Height[maxEntities];
 
-            Canvas canvas = new Canvas(pnlCanvas);
-            canvas.clearCanvas(pnlCanvas.Width, pnlCanvas.Height);
+            Global.Canvas.clearCanvas(pnlCanvas.Width, pnlCanvas.Height);
 
             Random rand = new Random();
             for (int i = 0; i < maxEntities; i++)
             {
-                int randValue = rand.Next(0, maxHeight);
+                int randValue = rand.Next(0, Global.MaxHeight);
                 this.heights[i] = new Height(i, randValue);
-                graphics.FillRectangle(new SolidBrush(Color.Black), i * 5, maxHeight - randValue, 5, maxHeight);
-                graphics.DrawRectangle(new Pen(Color.White, 1), i * 5, maxHeight - randValue, 5, maxHeight);
+                Global.Graphics.FillRectangle(new SolidBrush(Color.Black), i * 5, Global.MaxHeight - randValue, 5, Global.MaxHeight);
+                Global.Graphics.DrawRectangle(new Pen(Color.White, 1), i * 5, Global.MaxHeight - randValue, 5, Global.MaxHeight);
             }
-            printValues();
+            //printValues();
         }
 
         private void printValues()
@@ -61,7 +63,7 @@ namespace SortingVisualizer
 
         private void btnMergeSort_Click(object sender, EventArgs e)
         {
-            MergeSort merge = new MergeSort(graphics, maxHeight);
+            MergeSort merge = new MergeSort();
             var thread = new Thread(() =>
             {
                 Height[] sorted = new Height[this.heights.Length];

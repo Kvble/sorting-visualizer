@@ -63,6 +63,7 @@
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Global.cs" />
     <Compile Include="Height.cs" />
     <Compile Include="MergeSort.cs" />
     <Compile Include="Program.cs" />

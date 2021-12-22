@@ -6,18 +6,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Threading;
+using SortingVisualizer.Utility;
 
 namespace SortingVisualizer
 {
     class MergeSort
     {
-        Graphics graphics;
-        int maxHeight;
 
-        public MergeSort(Graphics graphics, int maxHeight)
+        public MergeSort()
         {
-            this.graphics = graphics;
-            this.maxHeight = maxHeight;
         }
         public Height[] MergeSortHelper(Height[] height)
         {
@@ -68,11 +65,9 @@ namespace SortingVisualizer
             int index = left.First().Id;
             while (NotEmpty(left) && NotEmpty(right))
             {
-                graphics.FillRectangle(new SolidBrush(Color.Red), left.First().Id * 5, maxHeight - left.First().Value, 5, maxHeight);
-                graphics.DrawRectangle(new Pen(Color.White, 1), left.First().Id * 5, maxHeight - left.First().Value, 5, maxHeight);
-                graphics.FillRectangle(new SolidBrush(Color.Red), right.First().Id * 5, maxHeight - right.First().Value, 5, maxHeight);
-                graphics.DrawRectangle(new Pen(Color.White, 1), right.First().Id * 5, maxHeight - right.First().Value, 5, maxHeight);
-                Thread.Sleep(50);
+                Global.Canvas.drawRect(Color.Red, left.First().Id * 5, Global.MaxHeight - left.First().Value);
+                Global.Canvas.drawRect(Color.Red, right.First().Id * 5, Global.MaxHeight - right.First().Value);
+                Thread.Sleep(15);
                 if (left.First().Value <= right.First().Value)
                     MoveValueFromSourceToResult(left, result, index, right, false, true);
                 else
@@ -102,50 +97,35 @@ namespace SortingVisualizer
 
         private void MoveValueFromSourceToResult(List<Height> source, List<Height> result, int index, List<Height> compared, bool isChanging, bool isSourceLeft)
         {
-            graphics.FillRectangle(new SolidBrush(Color.White), source.First().Id * 5, 0, 5, maxHeight);
+            Global.Canvas.drawRect(Color.White, source.First().Id * 5, 0);
             if (NotEmpty(compared))
             {
                 if(isChanging)
                 {
-                    graphics.FillRectangle(new SolidBrush(Color.White), compared.First().Id * 5, 0, 5, maxHeight);
+                    Global.Canvas.drawRect(Color.White, compared.First().Id * 5, 0);
                     if (isSourceLeft)
                     {
                         for (int i = 1; i < source.Count; i++)
                         {
                             source[i].Id++;
-                            graphics.FillRectangle(new SolidBrush(Color.White), source[i].Id * 5, 0, 5, maxHeight);
-                            graphics.FillRectangle(new SolidBrush(Color.Black), source[i].Id * 5, maxHeight - source[i].Value, 5, maxHeight);
-                            graphics.DrawRectangle(new Pen(Color.White, 1), source[i].Id * 5, maxHeight - source[i].Value, 5, maxHeight);
+                            Global.Canvas.drawRect(Color.White, source[i].Id * 5, 0);
+                            Global.Canvas.drawRect(Color.Black, source[i].Id * 5, Global.MaxHeight - source[i].Value);
                         }
                     }
                     for (int i = 0; i < compared.Count; i++)
                     {
                         compared[i].Id++;
-                        graphics.FillRectangle(new SolidBrush(Color.White), compared[i].Id * 5, 0, 5, maxHeight);
-                        graphics.FillRectangle(new SolidBrush(Color.Black), compared[i].Id * 5, maxHeight - compared[i].Value, 5, maxHeight);
-                        graphics.DrawRectangle(new Pen(Color.White, 1), compared[i].Id * 5, maxHeight - compared[i].Value, 5, maxHeight);
+                        Global.Canvas.drawRect(Color.White, compared[i].Id * 5, 0);
+                        Global.Canvas.drawRect(Color.Black, compared[i].Id * 5, Global.MaxHeight - compared[i].Value);
                     }
                 }
             }
             source.First().Id = index;
-            graphics.FillRectangle(new SolidBrush(Color.Blue), source.First().Id * 5, maxHeight - source.First().Value, 5, maxHeight);
-            graphics.DrawRectangle(new Pen(Color.White, 1), source.First().Id * 5, maxHeight - source.First().Value, 5, maxHeight);
-            Thread.Sleep(10);
-            graphics.FillRectangle(new SolidBrush(Color.Black), source.First().Id * 5, maxHeight - source.First().Value, 5, maxHeight);
-            graphics.DrawRectangle(new Pen(Color.White, 1), source.First().Id * 5, maxHeight - source.First().Value, 5, maxHeight);
+            Global.Canvas.drawRect(Color.Blue, source.First().Id * 5, Global.MaxHeight - source.First().Value);
+            Thread.Sleep(5);
+            Global.Canvas.drawRect(Color.Black, source.First().Id * 5, Global.MaxHeight - source.First().Value);
             result.Add(source.First());
             source.RemoveAt(0);
-            print(result);
-        }
-
-        private static void print(List<Height> source)
-        {
-            string str = "";
-            foreach (var item in source)
-            {
-                str += item.Value + " ";
-            }
-            Console.WriteLine(str);
         }
     }
 }
