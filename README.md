@@ -13,12 +13,22 @@ If you want to start developing this application further you have just to clone 
 
 ## Features
 
-**Version 1.0.1**
+**Version 0.2.0**
+
+- Added Quick Sort algorithm
+- Added animations for Quick Sort
+- Added buttons disable on sorting thread being executed
+- Added Github repo button link on top menu
+- Reorganized project's base structure
+- Added application icon
+- Added digital sign
+
+**Version 0.1.1**
 
 -   Improvements to the modularity of the code
 -   Changed sorting speed
 
-**Version 1.0.0**
+**Version 0.1.0**
 
 -   Added base structure
 -   Added Merge Sort
