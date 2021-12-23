@@ -30,3 +30,5 @@ D:\Projects\Github\sorting-visualizer\obj\Debug\SortingVisualizer.csproj.Generat
 D:\Projects\Github\sorting-visualizer\obj\Debug\SortingVisualizer.csproj.CoreCompileInputs.cache
 D:\Projects\Github\sorting-visualizer\obj\Debug\SortingVisualizer.exe
 D:\Projects\Github\sorting-visualizer\obj\Debug\SortingVisualizer.pdb
+D:\Projects\Github\sorting-visualizer\obj\Debug\SortingVisualizer.csproj.CopyComplete
+D:\Projects\Github\sorting-visualizer\obj\Debug\SortingVisualizer.csproj.SuggestedBindingRedirects.cache

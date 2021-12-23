@@ -5,7 +5,7 @@ It makes you visualize how different sorting algorithms work.
 
 ## Installing / Getting started
 
-You can clone or download the project and compile it by yourself using [Visual Studio Community](https://visualstudio.microsoft.com/it/vs/community/) or you can download my application from this [link](https://github.com/Kvble/sorting-visualizer/raw/main/bin/Release/SortingVisualizer.exe) and just execute it.
+You can clone or download the project and compile it by yourself using [Visual Studio Community](https://visualstudio.microsoft.com/it/vs/community/) or you can download the latest version of the app from this [link](https://github.com/Kvble/sorting-visualizer/releases) and just execute it.
 
 ## Developing
 
