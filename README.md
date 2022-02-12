@@ -13,7 +13,14 @@ If you want to start developing this application further you have just to clone 
 
 ## Features
 
-**Version 0.2.0**
+**Version 1.0.0**
+- Refactored project structure
+- Added Interfaces
+- Added Insertion sort
+- Added thread management
+- Added stop thread feature
+
+**Version 0.2.0 [Alpha]**
 
 - Added Quick Sort algorithm
 - Added animations for Quick Sort
@@ -23,12 +30,12 @@ If you want to start developing this application further you have just to clone 
 - Added application icon
 - Added digital sign
 
-**Version 0.1.1**
+**Version 0.1.1 [Alpha]**
 
 -   Improvements to the modularity of the code
 -   Changed sorting speed
 
-**Version 0.1.0**
+**Version 0.1.0 [Alpha]**
 
 -   Added base structure
 -   Added Merge Sort
