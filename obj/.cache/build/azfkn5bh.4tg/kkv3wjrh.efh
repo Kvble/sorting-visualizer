@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Sorting Visualizer </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Sorting Visualizer ">
+    <meta name="generator" content="docfx 2.59.0.0">
+    
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles/docfx.vendor.css">
+    <link rel="stylesheet" href="styles/docfx.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <meta property="docfx:navrel" content="toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="index.html">
+                <img id="logo" class="svg" src="logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="sorting-visualizer" sourcefile="README.md" sourcestartlinenumber="1" sourceendlinenumber="1">Sorting Visualizer</h1>
+
+<p sourcefile="README.md" sourcestartlinenumber="3" sourceendlinenumber="4">This is a Windows Form application project made just for educational purposes.
+It makes you visualize how different sorting algorithms work.</p>
+<h2 id="installing--getting-started" sourcefile="README.md" sourcestartlinenumber="6" sourceendlinenumber="6">Installing / Getting started</h2>
+<p sourcefile="README.md" sourcestartlinenumber="8" sourceendlinenumber="8">You can clone or download the project and compile it by yourself using <a href="https://visualstudio.microsoft.com/it/vs/community/" data-raw-source="[Visual Studio Community](https://visualstudio.microsoft.com/it/vs/community/)" sourcefile="README.md" sourcestartlinenumber="8" sourceendlinenumber="8">Visual Studio Community</a> or you can download the latest version of the app from this <a href="https://github.com/Kvble/sorting-visualizer/releases" data-raw-source="[link](https://github.com/Kvble/sorting-visualizer/releases)" sourcefile="README.md" sourcestartlinenumber="8" sourceendlinenumber="8">link</a> and just execute it.</p>
+<h2 id="developing" sourcefile="README.md" sourcestartlinenumber="10" sourceendlinenumber="10">Developing</h2>
+<p sourcefile="README.md" sourcestartlinenumber="12" sourceendlinenumber="12">If you want to start developing this application further you have just to clone or download the project from this repository page and open the file <strong>SortingVisualizer.sln</strong> with <a href="https://visualstudio.microsoft.com/it/vs/community/" data-raw-source="[Visual Studio Community](https://visualstudio.microsoft.com/it/vs/community/)" sourcefile="README.md" sourcestartlinenumber="12" sourceendlinenumber="12">Visual Studio Community</a></p>
+<h2 id="features" sourcefile="README.md" sourcestartlinenumber="14" sourceendlinenumber="14">Features</h2>
+<p sourcefile="README.md" sourcestartlinenumber="16" sourceendlinenumber="16"><strong>Version 0.2.0</strong></p>
+<ul sourcefile="README.md" sourcestartlinenumber="18" sourceendlinenumber="24">
+<li sourcefile="README.md" sourcestartlinenumber="18" sourceendlinenumber="18">Added Quick Sort algorithm</li>
+<li sourcefile="README.md" sourcestartlinenumber="19" sourceendlinenumber="19">Added animations for Quick Sort</li>
+<li sourcefile="README.md" sourcestartlinenumber="20" sourceendlinenumber="20">Added buttons disable on sorting thread being executed</li>
+<li sourcefile="README.md" sourcestartlinenumber="21" sourceendlinenumber="21">Added Github repo button link on top menu</li>
+<li sourcefile="README.md" sourcestartlinenumber="22" sourceendlinenumber="22">Reorganized project&#39;s base structure</li>
+<li sourcefile="README.md" sourcestartlinenumber="23" sourceendlinenumber="23">Added application icon</li>
+<li sourcefile="README.md" sourcestartlinenumber="24" sourceendlinenumber="24">Added digital sign</li>
+</ul>
+<p sourcefile="README.md" sourcestartlinenumber="26" sourceendlinenumber="26"><strong>Version 0.1.1</strong></p>
+<ul sourcefile="README.md" sourcestartlinenumber="28" sourceendlinenumber="29">
+<li sourcefile="README.md" sourcestartlinenumber="28" sourceendlinenumber="28">Improvements to the modularity of the code</li>
+<li sourcefile="README.md" sourcestartlinenumber="29" sourceendlinenumber="29">Changed sorting speed</li>
+</ul>
+<p sourcefile="README.md" sourcestartlinenumber="31" sourceendlinenumber="31"><strong>Version 0.1.0</strong></p>
+<ul sourcefile="README.md" sourcestartlinenumber="33" sourceendlinenumber="35">
+<li sourcefile="README.md" sourcestartlinenumber="33" sourceendlinenumber="33">Added base structure</li>
+<li sourcefile="README.md" sourcestartlinenumber="34" sourceendlinenumber="34">Added Merge Sort</li>
+<li sourcefile="README.md" sourcestartlinenumber="35" sourceendlinenumber="35">Added animations for sorting process</li>
+</ul>
+<h2 id="contributing" sourcefile="README.md" sourcestartlinenumber="37" sourceendlinenumber="37">Contributing</h2>
+<p sourcefile="README.md" sourcestartlinenumber="39" sourceendlinenumber="40">If you&#39;d like to contribute, please fork the repository and use a feature
+branch. Pull requests are warmly welcome.</p>
+<h2 id="links" sourcefile="README.md" sourcestartlinenumber="42" sourceendlinenumber="42">Links</h2>
+<p sourcefile="README.md" sourcestartlinenumber="44" sourceendlinenumber="44">Homepage | <a href="https://github.com/Kvble/sorting-visualizer" data-raw-source="https://github.com/Kvble/sorting-visualizer" sourcefile="README.md" sourcestartlinenumber="44" sourceendlinenumber="44">https://github.com/Kvble/sorting-visualizer</a></p>
+<p sourcefile="README.md" sourcestartlinenumber="46" sourceendlinenumber="46">Other projects:</p>
+<h2 id="licensing" sourcefile="README.md" sourcestartlinenumber="48" sourceendlinenumber="48">Licensing</h2>
+<p sourcefile="README.md" sourcestartlinenumber="50" sourceendlinenumber="50">The code in this project is licensed under <a href="https://github.com/Kvble/sorting-visualizer/blob/main/LICENSE.md" data-raw-source="[MIT license](https://github.com/Kvble/sorting-visualizer/blob/main/LICENSE.md)" sourcefile="README.md" sourcestartlinenumber="50" sourceendlinenumber="50">MIT license</a>.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Kvble/sorting-visualizer/blob/main/README.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="styles/docfx.js"></script>
+    <script type="text/javascript" src="styles/main.js"></script>
+  </body>
+</html>

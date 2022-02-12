@@ -16,3 +16,6 @@ D:\Projects\Github\sorting-visualizer\obj\Release\SortingVisualizer.csproj.CopyC
 D:\Projects\Github\sorting-visualizer\obj\Release\SortingVisualizer.exe
 D:\Projects\Github\sorting-visualizer\obj\Release\SortingVisualizer.pdb
 D:\Projects\Github\sorting-visualizer\obj\Release\SortingVisualizer.csproj.SuggestedBindingRedirects.cache
+D:\Projects\Github\sorting-visualizer\bin\Release\Cake.DocFx.dll
+D:\Projects\Github\sorting-visualizer\bin\Release\Cake.DocFx.pdb
+D:\Projects\Github\sorting-visualizer\bin\Release\Cake.DocFx.xml

@@ -38,8 +38,10 @@ namespace SortingVisualizer
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.githubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.btnInsertionSort = new System.Windows.Forms.Button();
+            this.linkedInToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlControl.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -49,6 +51,7 @@ namespace SortingVisualizer
             this.pnlControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
+            this.pnlControl.Controls.Add(this.btnInsertionSort);
             this.pnlControl.Controls.Add(this.btnQuickSort);
             this.pnlControl.Controls.Add(this.btnMergeSort);
             this.pnlControl.Controls.Add(this.btnGenerateArray);
@@ -121,17 +124,25 @@ namespace SortingVisualizer
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.githubToolStripMenuItem});
+            this.githubToolStripMenuItem,
+            this.linkedInToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // githubToolStripMenuItem
+            // 
+            this.githubToolStripMenuItem.Name = "githubToolStripMenuItem";
+            this.githubToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.githubToolStripMenuItem.Text = "Github";
+            this.githubToolStripMenuItem.Click += new System.EventHandler(this.githubToolStripMenuItem_Click);
             // 
             // menuStrip1
             // 
@@ -144,12 +155,26 @@ namespace SortingVisualizer
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // githubToolStripMenuItem
+            // btnInsertionSort
             // 
-            this.githubToolStripMenuItem.Name = "githubToolStripMenuItem";
-            this.githubToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.githubToolStripMenuItem.Text = "Github";
-            this.githubToolStripMenuItem.Click += new System.EventHandler(this.githubToolStripMenuItem_Click);
+            this.btnInsertionSort.FlatAppearance.BorderSize = 0;
+            this.btnInsertionSort.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnInsertionSort.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInsertionSort.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnInsertionSort.Location = new System.Drawing.Point(455, 0);
+            this.btnInsertionSort.Name = "btnInsertionSort";
+            this.btnInsertionSort.Size = new System.Drawing.Size(157, 70);
+            this.btnInsertionSort.TabIndex = 3;
+            this.btnInsertionSort.Text = "Insertion Sort";
+            this.btnInsertionSort.UseVisualStyleBackColor = true;
+            this.btnInsertionSort.Click += new System.EventHandler(this.btnInsertionSort_Click);
+            // 
+            // linkedInToolStripMenuItem
+            // 
+            this.linkedInToolStripMenuItem.Name = "linkedInToolStripMenuItem";
+            this.linkedInToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.linkedInToolStripMenuItem.Text = "LinkedIn";
+            this.linkedInToolStripMenuItem.Click += new System.EventHandler(this.linkedInToolStripMenuItem_Click);
             // 
             // FrmMain
             // 
@@ -184,6 +209,8 @@ namespace SortingVisualizer
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.Button btnQuickSort;
         private System.Windows.Forms.ToolStripMenuItem githubToolStripMenuItem;
+        private System.Windows.Forms.Button btnInsertionSort;
+        private System.Windows.Forms.ToolStripMenuItem linkedInToolStripMenuItem;
     }
 }
 
