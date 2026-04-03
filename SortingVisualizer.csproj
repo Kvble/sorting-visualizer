@@ -102,9 +102,7 @@
     <Compile Include="Models\SortElement.cs" />
     <Compile Include="Utility\MergeSort.cs" />
     <Compile Include="Interfaces\ICanvas.cs" />
-    <Compile Include="Interfaces\IInsertionSort.cs" />
-    <Compile Include="Interfaces\IMergeSort.cs" />
-    <Compile Include="Interfaces\IQuickSort.cs" />
+    <Compile Include="Interfaces\ISortAlgorithm.cs" />
     <Compile Include="Program.cs" />
     <EmbeddedResource Include="Forms\FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>

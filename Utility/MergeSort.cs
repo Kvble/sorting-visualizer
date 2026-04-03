@@ -3,15 +3,22 @@ using System.Linq;
 using System.Drawing;
 using System.Threading;
 using SortingVisualizer.Interfaces;
+using System;
 using SortingVisualizer.Models;
 
 namespace SortingVisualizer.Utility
 {
-    class MergeSort : IMergeSort
+    class MergeSort : ISortAlgorithm
     {
         public MergeSort(){}
 
-        public SortElement[] MergeSortHelper(SortElement[] height, CancellationToken token)
+        public void Sort(SortElement[] elements, CancellationToken token)
+        {
+            var sorted = MergeSortHelper(elements, token);
+            System.Array.Copy(sorted, elements, elements.Length);
+        }
+
+        private SortElement[] MergeSortHelper(SortElement[] height, CancellationToken token)
         {
             int half = height.Length / 2;
 
@@ -55,7 +62,7 @@ namespace SortingVisualizer.Utility
             return this.MergeSortProcess(leftSide.ToList(), rightSide.ToList(), token);
         }
 
-        public SortElement[] MergeSortProcess(List<SortElement> left, List<SortElement> right, CancellationToken token)
+        private SortElement[] MergeSortProcess(List<SortElement> left, List<SortElement> right, CancellationToken token)
         {
             var result = new List<SortElement>();
             int index = left.First().Id;
@@ -89,7 +96,7 @@ namespace SortingVisualizer.Utility
             return result.ToArray();
         }
 
-        public void MoveValueFromSourceToResult(List<SortElement> source, List<SortElement> result, int index, List<SortElement> compared, bool isChanging, bool isSourceLeft)
+        private void MoveValueFromSourceToResult(List<SortElement> source, List<SortElement> result, int index, List<SortElement> compared, bool isChanging, bool isSourceLeft)
         {
             Global.Canvas.drawRect(Color.White, source.First().Id * Global.Width, 0);
             if (SortUtil.NotEmpty(compared))

@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Diagnostics;
 using System.Windows.Forms;
 using System.Threading;
+using SortingVisualizer.Interfaces;
 using SortingVisualizer.Models;
 using SortingVisualizer.Utility;
 
@@ -107,43 +108,29 @@ namespace SortingVisualizer
                 Global.Canvas.drawRect(Color.Black, i * Global.Width, Global.MaxHeight - randomHeight);
             }
         }
-        public void btnMergeSort_Click(object sender, EventArgs e)
+        private void StartSort(ISortAlgorithm algorithm)
         {
             disableSortButtons();
-            MergeSort merge = new MergeSort();
             var token = Global.Cts.Token;
             currentThread = new Thread(() =>
             {
-                this.heights = merge.MergeSortHelper(this.heights, token);
+                algorithm.Sort(this.heights, token);
             });
             currentThread.IsBackground = true;
             currentThread.Start();
         }
+        public void btnMergeSort_Click(object sender, EventArgs e)
+        {
+            StartSort(new MergeSort());
+        }
         public void btnQuickSort_Click(object sender, EventArgs e)
         {
-            disableSortButtons();
-            QuickSort quick = new QuickSort();
-            var token = Global.Cts.Token;
-            currentThread = new Thread(() =>
-            {
-                quick.QuickSortHelper(this.heights, 0, this.heights.Length - 1, token);
-            });
-            currentThread.IsBackground = true;
-            currentThread.Start();
+            StartSort(new QuickSort());
         }
         public void btnInsertionSort_Click(object sender, EventArgs e)
         {
             printArray();
-            disableSortButtons();
-            InsertionSort insertion = new InsertionSort();
-            var token = Global.Cts.Token;
-            currentThread = new Thread(() =>
-            {
-                insertion.InsertionSortProcess(this.heights, token);
-                printArray();
-            });
-            currentThread.IsBackground = true;
-            currentThread.Start();
+            StartSort(new InsertionSort());
         }
         /// <summary>
         /// Iterates every element of the array and prints the element's Id and Value 

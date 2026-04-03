@@ -1,13 +1,18 @@
 ﻿using System.Drawing;
 using System.Threading;
+using SortingVisualizer.Interfaces;
 using SortingVisualizer.Models;
 
 namespace SortingVisualizer.Utility
 {
-    class QuickSort
+    class QuickSort : ISortAlgorithm
     {
         public QuickSort() { }
-        public void QuickSortHelper(SortElement[] heights, int low, int high, CancellationToken token)
+        public void Sort(SortElement[] elements, CancellationToken token)
+        {
+            QuickSortHelper(elements, 0, elements.Length - 1, token);
+        }
+        private void QuickSortHelper(SortElement[] heights, int low, int high, CancellationToken token)
         {
             if (token.IsCancellationRequested) return;
             if (low < high)
@@ -34,7 +39,7 @@ namespace SortingVisualizer.Utility
             Global.Canvas.drawRect(Color.Black, a.Id * Global.Width, Global.MaxHeight - a.Value);
             Global.Canvas.drawRect(Color.Black, b.Id * Global.Width, Global.MaxHeight - b.Value);
         }
-        public int QuickSortPartition(SortElement[] heights, int low, int high, CancellationToken token)
+        private int QuickSortPartition(SortElement[] heights, int low, int high, CancellationToken token)
         {
             SortElement pivot = heights[low];
             int i = (low - 1);
