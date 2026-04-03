@@ -16,37 +16,34 @@ namespace SortingVisualizer
         private SortElement[] _elements;
         private Thread _currentThread;
         private Canvas _canvas;
-        private Graphics _graphics;
         private CancellationTokenSource _cts = new CancellationTokenSource();
 
         public FrmMain()
         {
             InitializeComponent();
+            typeof(Panel).InvokeMember("DoubleBuffered",
+                System.Reflection.BindingFlags.SetProperty | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic,
+                null, pnlCanvas, new object[] { true });
+            pnlCanvas.Paint += PnlCanvas_Paint;
         }
 
-        /// <summary>
-        /// Initialize general window's settings
-        /// </summary>
+        private void PnlCanvas_Paint(object sender, PaintEventArgs e)
+        {
+            _canvas?.PaintTo(e.Graphics);
+        }
+
         private void InitWindowSettings()
         {
             this.MaximizeBox = false;
             this.MinimizeBox = false;
         }
 
-        /// <summary>
-        /// Initialize canvas and array parameters
-        /// </summary>
         private void InitParameters()
         {
-            _graphics?.Dispose();
-            _graphics = pnlCanvas.CreateGraphics();
-            _canvas = new Canvas(_graphics, BarWidth, pnlCanvas.Height);
+            _canvas = new Canvas(pnlCanvas.Width, pnlCanvas.Height, BarWidth, () => pnlCanvas.Invalidate());
             _elements = new SortElement[pnlCanvas.Width / BarWidth];
         }
 
-        /// <summary>
-        /// Enables all sorting buttons on the window
-        /// </summary>
         private void EnableSortButtons()
         {
             btnQuickSort.Enabled = true;
@@ -54,9 +51,6 @@ namespace SortingVisualizer
             btnInsertionSort.Enabled = true;
         }
 
-        /// <summary>
-        /// Disables all sorting buttons on the window
-        /// </summary>
         private void DisableSortButtons()
         {
             btnQuickSort.Enabled = false;
@@ -64,9 +58,6 @@ namespace SortingVisualizer
             btnInsertionSort.Enabled = false;
         }
 
-        /// <summary>
-        /// Cancels any running sort and creates a fresh CancellationTokenSource
-        /// </summary>
         private void ClearThread()
         {
             _cts.Cancel();

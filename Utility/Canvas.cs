@@ -6,18 +6,33 @@ namespace SortingVisualizer.Utility
     class Canvas : ICanvas
     {
         private static readonly object _drawLock = new object();
+        private readonly Bitmap _buffer;
         private readonly Graphics _graphics;
+        private readonly System.Action _requestRepaint;
 
         public int BarWidth { get; }
         public int MaxHeight { get; }
         public int CompareDelayMs => 15;
         public int SwapDelayMs => 5;
 
-        public Canvas(Graphics graphics, int barWidth, int maxHeight)
+        public Canvas(int width, int height, int barWidth, System.Action requestRepaint)
         {
-            _graphics = graphics;
+            _buffer = new Bitmap(width, height);
+            _graphics = Graphics.FromImage(_buffer);
+            _requestRepaint = requestRepaint;
             BarWidth = barWidth;
-            MaxHeight = maxHeight;
+            MaxHeight = height;
+        }
+
+        /// <summary>
+        /// Paints the internal buffer to a target Graphics (called from Paint handler)
+        /// </summary>
+        public void PaintTo(Graphics target)
+        {
+            lock (_drawLock)
+            {
+                target.DrawImageUnscaled(_buffer, 0, 0);
+            }
         }
 
         public void ClearCanvas(int width, int height)
@@ -27,6 +42,7 @@ namespace SortingVisualizer.Utility
                 using var brush = new SolidBrush(Color.White);
                 _graphics.FillRectangle(brush, 0, 0, width, height);
             }
+            _requestRepaint();
         }
 
         public void DrawRect(Color color, int xAxis, int yAxis)
@@ -38,6 +54,7 @@ namespace SortingVisualizer.Utility
                 using var pen = new Pen(Color.White, 1);
                 _graphics.DrawRectangle(pen, xAxis, yAxis, BarWidth, MaxHeight);
             }
+            _requestRepaint();
         }
     }
 }
