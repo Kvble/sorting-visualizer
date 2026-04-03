@@ -87,11 +87,11 @@ namespace SortingVisualizer
         }
         public void githubToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("https://github.com/Kvble/sorting-visualizer");
+            Process.Start(new ProcessStartInfo("https://github.com/Kvble/sorting-visualizer") { UseShellExecute = true });
         }
         private void linkedInToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("https://www.linkedin.com/in/kevin-xavier-andrade-125b9b174/");
+            Process.Start(new ProcessStartInfo("https://www.linkedin.com/in/kevin-xavier-andrade-125b9b174/") { UseShellExecute = true });
         }
         public void btnGenerateArray_Click(object sender, EventArgs e)
         {
@@ -129,18 +129,7 @@ namespace SortingVisualizer
         }
         public void btnInsertionSort_Click(object sender, EventArgs e)
         {
-            PrintArray();
             StartSort(new InsertionSort());
-        }
-        /// <summary>
-        /// Iterates every element of the array and prints the element's Id and Value
-        /// </summary>
-        public void PrintArray()
-        {
-            foreach (var item in this._heights)
-            {
-                Console.WriteLine($"Id: {item.Id} | Value: {item.Value}\n");
-            }
         }
 
 

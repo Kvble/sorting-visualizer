@@ -15,6 +15,7 @@ namespace SortingVisualizer.Utility
         public void Sort(SortElement[] elements, CancellationToken token)
         {
             var sorted = MergeSortHelper(elements, token);
+            if (token.IsCancellationRequested) return;
             System.Array.Copy(sorted, elements, elements.Length);
         }
 
@@ -57,7 +58,9 @@ namespace SortingVisualizer.Utility
             }
 
             leftSide = MergeSortHelper(leftSide, token);
+            if (token.IsCancellationRequested) return leftSide;
             rightSide = MergeSortHelper(rightSide, token);
+            if (token.IsCancellationRequested) return rightSide;
 
             return this.MergeSortProcess(leftSide.ToList(), rightSide.ToList(), token);
         }
@@ -65,6 +68,8 @@ namespace SortingVisualizer.Utility
         private SortElement[] MergeSortProcess(List<SortElement> left, List<SortElement> right, CancellationToken token)
         {
             var result = new List<SortElement>();
+            if (left.Count == 0) return right.ToArray();
+            if (right.Count == 0) return left.ToArray();
             int index = left.First().Id;
             while (left.Count > 0 && right.Count > 0)
             {
