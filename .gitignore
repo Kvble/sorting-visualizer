@@ -296,3 +296,5 @@ docfx.json
 index.md
 log.txt
 toc.yml
+# AI plugin generated files
+docs/superpowers/
