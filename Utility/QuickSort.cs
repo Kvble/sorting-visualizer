@@ -5,7 +5,7 @@ using SortingVisualizer.Models;
 
 namespace SortingVisualizer.Utility
 {
-    class QuickSort : ISortAlgorithm
+    internal class QuickSort : ISortAlgorithm
     {
         private readonly ICanvas _canvas;
 

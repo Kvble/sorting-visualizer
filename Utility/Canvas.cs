@@ -1,21 +1,22 @@
+using System;
 using System.Drawing;
 using SortingVisualizer.Interfaces;
 
 namespace SortingVisualizer.Utility
 {
-    class Canvas : ICanvas
+    internal class Canvas : ICanvas, IDisposable
     {
-        private static readonly object _drawLock = new object();
+        private readonly object _drawLock = new object();
         private readonly Bitmap _buffer;
         private readonly Graphics _graphics;
-        private readonly System.Action _requestRepaint;
+        private readonly Action _requestRepaint;
 
         public int BarWidth { get; }
         public int MaxHeight { get; }
         public int CompareDelayMs => 15;
         public int SwapDelayMs => 5;
 
-        public Canvas(int width, int height, int barWidth, System.Action requestRepaint)
+        public Canvas(int width, int height, int barWidth, Action requestRepaint)
         {
             _buffer = new Bitmap(width, height);
             _graphics = Graphics.FromImage(_buffer);
@@ -24,9 +25,6 @@ namespace SortingVisualizer.Utility
             MaxHeight = height;
         }
 
-        /// <summary>
-        /// Paints the internal buffer to a target Graphics (called from Paint handler)
-        /// </summary>
         public void PaintTo(Graphics target)
         {
             lock (_drawLock)
@@ -55,6 +53,12 @@ namespace SortingVisualizer.Utility
                 _graphics.DrawRectangle(pen, xAxis, yAxis, BarWidth, MaxHeight);
             }
             _requestRepaint();
+        }
+
+        public void Dispose()
+        {
+            _graphics?.Dispose();
+            _buffer?.Dispose();
         }
     }
 }

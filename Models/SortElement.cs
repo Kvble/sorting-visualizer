@@ -1,6 +1,6 @@
 ﻿namespace SortingVisualizer.Models
 {
-    class SortElement
+    internal class SortElement
     {
         public SortElement(int id, int value)
         {

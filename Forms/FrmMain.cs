@@ -12,6 +12,7 @@ namespace SortingVisualizer
     public partial class FrmMain : Form
     {
         private const int BarWidth = 5;
+        private const int ThreadJoinTimeoutMs = 2000;
 
         private SortElement[] _elements;
         private Thread _currentThread;
@@ -40,7 +41,9 @@ namespace SortingVisualizer
 
         private void InitParameters()
         {
-            _canvas = new Canvas(pnlCanvas.Width, pnlCanvas.Height, BarWidth, () => pnlCanvas.Invalidate());
+            _canvas?.Dispose();
+            _canvas = new Canvas(pnlCanvas.Width, pnlCanvas.Height, BarWidth,
+                () => { if (!pnlCanvas.IsDisposed) pnlCanvas.BeginInvoke((Action)(() => pnlCanvas.Invalidate())); });
             _elements = new SortElement[pnlCanvas.Width / BarWidth];
         }
 
@@ -61,7 +64,7 @@ namespace SortingVisualizer
         private void ClearThread()
         {
             _cts.Cancel();
-            _currentThread?.Join(500);
+            _currentThread?.Join(ThreadJoinTimeoutMs);
             _cts.Dispose();
             _cts = new CancellationTokenSource();
         }
@@ -128,6 +131,15 @@ namespace SortingVisualizer
         private void btnInsertionSort_Click(object sender, EventArgs e)
         {
             StartSort(new InsertionSort(_canvas));
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            _cts.Cancel();
+            _currentThread?.Join(ThreadJoinTimeoutMs);
+            _cts.Dispose();
+            _canvas?.Dispose();
+            base.OnFormClosing(e);
         }
     }
 }
