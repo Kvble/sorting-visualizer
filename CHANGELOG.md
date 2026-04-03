@@ -16,6 +16,11 @@
 - Sorting thread is now joined with 500ms timeout before disposing the `CancellationTokenSource`, preventing the old thread from drawing after cancellation
 - Fixed rendering lost on window overlap: replaced fragile `CreateGraphics()` with double-buffered `Bitmap` approach — Canvas now draws to an in-memory buffer, and the panel repaints from it via `Paint` event
 - Enabled `DoubleBuffered` on canvas panel to eliminate flickering during sort animations
+- `Canvas` now implements `IDisposable` — `Bitmap` and `Graphics` are properly disposed when generating a new array or closing the form
+- Changed `_drawLock` from `static` to instance field — prevents cross-instance lock contention
+- `pnlCanvas.Invalidate()` now called via `BeginInvoke` with `IsDisposed` guard to prevent cross-thread and disposed-control issues
+- Thread join timeout increased from 500ms to 2000ms for more reliable cancellation
+- `CancellationTokenSource` properly cancelled, joined, and disposed on form close via `OnFormClosing`
 
 ### Refactoring
 
@@ -29,6 +34,9 @@
 - All event handlers in `FrmMain` changed from `public` to `private`
 - Modernized `using` statements to C# 8+ `using` declarations in `Canvas`
 - Removed debug `PrintArray()` method and its `Console.WriteLine` calls
+- Simplified MergeSort array split from 25 lines to 2 using C# range syntax
+- Replaced `.First()` with `[0]` indexing in MergeSort, removed `System.Linq` dependency
+- Added explicit `internal` access modifier to all non-public classes
 
 ### Cleanup
 
