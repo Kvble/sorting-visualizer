@@ -19,25 +19,25 @@ namespace SortingVisualizer.Utility
             System.Array.Copy(sorted, elements, elements.Length);
         }
 
-        private SortElement[] MergeSortHelper(SortElement[] height, CancellationToken token)
+        private SortElement[] MergeSortHelper(SortElement[] elements, CancellationToken token)
         {
-            int half = height.Length / 2;
+            int half = elements.Length / 2;
 
-            if (height.Length <= 1) return height;
-            if (token.IsCancellationRequested) return height;
+            if (elements.Length <= 1) return elements;
+            if (token.IsCancellationRequested) return elements;
 
             SortElement[] leftSide;
             SortElement[] rightSide;
 
-            if (height.Length % 2 == 0)
+            if (elements.Length % 2 == 0)
             {
                 leftSide = new SortElement[half];
                 rightSide = new SortElement[half];
                 int index = half;
                 for (int i = 0; i < half;  i++)
                 {
-                    leftSide[i] = height[i];
-                    rightSide[i] = height[index];
+                    leftSide[i] = elements[i];
+                    rightSide[i] = elements[index];
                     index++;
                 }
             }
@@ -47,12 +47,12 @@ namespace SortingVisualizer.Utility
                 rightSide = new SortElement[half];
                 for (int i = 0; i < half + 1; i++)
                {
-                    leftSide[i] = height[i];
+                    leftSide[i] = elements[i];
                 }
                 int index = half + 1;
                 for (int i = 0; i < half; i++)
                 {
-                    rightSide[i] = height[index];
+                    rightSide[i] = elements[index];
                     index++;
                 }
             }

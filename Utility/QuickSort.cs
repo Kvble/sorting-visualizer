@@ -12,15 +12,15 @@ namespace SortingVisualizer.Utility
         {
             QuickSortHelper(elements, 0, elements.Length - 1, token);
         }
-        private void QuickSortHelper(SortElement[] heights, int low, int high, CancellationToken token)
+        private void QuickSortHelper(SortElement[] elements, int low, int high, CancellationToken token)
         {
             if (token.IsCancellationRequested) return;
             if (low < high)
             {
-                int pi = QuickSortPartition(heights, low, high, token);
+                int pi = QuickSortPartition(elements, low, high, token);
 
-                QuickSortHelper(heights, low, pi, token);
-                QuickSortHelper(heights, pi + 1, high, token);
+                QuickSortHelper(elements, low, pi, token);
+                QuickSortHelper(elements, pi + 1, high, token);
             }
         }
         void Swap(ref SortElement a, ref SortElement b)
@@ -39,9 +39,9 @@ namespace SortingVisualizer.Utility
             Global.Canvas.DrawRect(Color.Black, a.Id * Global.Width, Global.MaxHeight - a.Value);
             Global.Canvas.DrawRect(Color.Black, b.Id * Global.Width, Global.MaxHeight - b.Value);
         }
-        private int QuickSortPartition(SortElement[] heights, int low, int high, CancellationToken token)
+        private int QuickSortPartition(SortElement[] elements, int low, int high, CancellationToken token)
         {
-            SortElement pivot = heights[low];
+            SortElement pivot = elements[low];
             int i = (low - 1);
             int j = (high + 1);
             do
@@ -50,14 +50,14 @@ namespace SortingVisualizer.Utility
                 do
                 {
                     j = j - 1;
-                } while (!token.IsCancellationRequested && heights[j].Value > pivot.Value);
+                } while (!token.IsCancellationRequested && elements[j].Value > pivot.Value);
                 do
                 {
                     i = i + 1;
-                } while (!token.IsCancellationRequested && heights[i].Value < pivot.Value);
+                } while (!token.IsCancellationRequested && elements[i].Value < pivot.Value);
                 if(i < j)
                 {
-                    Swap(ref heights[i], ref heights[j]);
+                    Swap(ref elements[i], ref elements[j]);
                 }
             } while (i < j);
             return j;

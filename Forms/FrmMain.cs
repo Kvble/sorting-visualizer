@@ -74,6 +74,7 @@ namespace SortingVisualizer
             if (Global.Cts != null)
             {
                 Global.Cts.Cancel();
+                _currentThread?.Join(500);
                 Global.Cts.Dispose();
             }
             Global.Cts = new CancellationTokenSource();
@@ -81,6 +82,7 @@ namespace SortingVisualizer
         public void FrmMain_Load(object sender, EventArgs e)
         {
             InitWindowSettings();
+            DisableSortButtons();
         }
         public void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
