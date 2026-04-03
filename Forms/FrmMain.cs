@@ -33,7 +33,7 @@ namespace SortingVisualizer
             Global.Graphics = pnlCanvas.CreateGraphics();
             Global.MaxHeight = pnlCanvas.Height;
             Global.MaxWidth = pnlCanvas.Width;
-            Global.Width = 5;
+            Global.Width = Global.BarWidth;
             Global.Canvas = new Canvas();
             Global.MaxEntities = Global.MaxWidth / Global.Width;
             this._heights = new SortElement[Global.MaxEntities];

@@ -88,7 +88,6 @@
     <Compile Include="Utility\InsertionSort.cs" />
     <Compile Include="Utility\QuickSort.cs" />
     <Compile Include="Utility\Canvas.cs" />
-    <Compile Include="Utility\SortUtil.cs" />
     <Compile Include="Forms\FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>

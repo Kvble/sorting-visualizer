@@ -27,7 +27,7 @@ namespace SortingVisualizer.Utility
         {
             Global.Canvas.DrawRect(Color.Red, a.Id * Global.Width, Global.MaxHeight - a.Value);
             Global.Canvas.DrawRect(Color.Red, b.Id * Global.Width, Global.MaxHeight - b.Value);
-            Thread.Sleep(15);
+            Thread.Sleep(Global.CompareDelayMs);
             Global.Canvas.DrawRect(Color.White, a.Id * Global.Width, 0);
             Global.Canvas.DrawRect(Color.White, b.Id * Global.Width, 0);
             int t = a.Value;
@@ -35,7 +35,7 @@ namespace SortingVisualizer.Utility
             b.Value = t;
             Global.Canvas.DrawRect(Color.Blue, a.Id * Global.Width, Global.MaxHeight - a.Value);
             Global.Canvas.DrawRect(Color.Blue, b.Id * Global.Width, Global.MaxHeight - b.Value);
-            Thread.Sleep(5);
+            Thread.Sleep(Global.SwapDelayMs);
             Global.Canvas.DrawRect(Color.Black, a.Id * Global.Width, Global.MaxHeight - a.Value);
             Global.Canvas.DrawRect(Color.Black, b.Id * Global.Width, Global.MaxHeight - b.Value);
         }

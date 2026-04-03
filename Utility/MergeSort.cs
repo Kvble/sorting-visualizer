@@ -66,12 +66,12 @@ namespace SortingVisualizer.Utility
         {
             var result = new List<SortElement>();
             int index = left.First().Id;
-            while (SortUtil.NotEmpty(left) && SortUtil.NotEmpty(right))
+            while (left.Count > 0 && right.Count > 0)
             {
                 if (token.IsCancellationRequested) return result.ToArray();
                 Global.Canvas.DrawRect(Color.Red, left.First().Id * Global.Width, Global.MaxHeight - left.First().Value);
                 Global.Canvas.DrawRect(Color.Red, right.First().Id * Global.Width, Global.MaxHeight - right.First().Value);
-                Thread.Sleep(15);
+                Thread.Sleep(Global.CompareDelayMs);
                 if (left.First().Value <= right.First().Value)
                     MoveValueFromSourceToResult(left, result, index, right, false, true);
                 else
@@ -80,14 +80,14 @@ namespace SortingVisualizer.Utility
                 index++;
             }
 
-            while (SortUtil.NotEmpty(left))
+            while (left.Count > 0)
             {
                 if (token.IsCancellationRequested) return result.ToArray();
                 MoveValueFromSourceToResult(left, result, index, right, false, true);
                 index++;
             }
 
-            while (SortUtil.NotEmpty(right))
+            while (right.Count > 0)
             {
                 if (token.IsCancellationRequested) return result.ToArray();
                 MoveValueFromSourceToResult(right, result, index, left, false, false);
@@ -99,7 +99,7 @@ namespace SortingVisualizer.Utility
         private void MoveValueFromSourceToResult(List<SortElement> source, List<SortElement> result, int index, List<SortElement> compared, bool isChanging, bool isSourceLeft)
         {
             Global.Canvas.DrawRect(Color.White, source.First().Id * Global.Width, 0);
-            if (SortUtil.NotEmpty(compared))
+            if (compared.Count > 0)
             {
                 if(isChanging)
                 {
@@ -123,7 +123,7 @@ namespace SortingVisualizer.Utility
             }
             source.First().Id = index;
             Global.Canvas.DrawRect(Color.Blue, source.First().Id * Global.Width, Global.MaxHeight - source.First().Value);
-            Thread.Sleep(5);
+            Thread.Sleep(Global.SwapDelayMs);
             Global.Canvas.DrawRect(Color.Black, source.First().Id * Global.Width, Global.MaxHeight - source.First().Value);
             result.Add(source.First());
             source.RemoveAt(0);

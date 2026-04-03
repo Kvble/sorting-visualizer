@@ -1,7 +1,5 @@
 ﻿using SortingVisualizer.Interfaces;
 using SortingVisualizer.Models;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
 
@@ -21,13 +19,13 @@ namespace SortingVisualizer.Utility
                     if (token.IsCancellationRequested) return;
                     Global.Canvas.DrawRect(Color.Red, elements[j + 1].Id * Global.Width, Global.MaxHeight - elements[j + 1].Value);
                     Global.Canvas.DrawRect(Color.Red, elements[j].Id * Global.Width, Global.MaxHeight - elements[j].Value);
-                    Thread.Sleep(15);
+                    Thread.Sleep(Global.CompareDelayMs);
                     Global.Canvas.DrawRect(Color.White, elements[j + 1].Id * Global.Width, 0);
                     Global.Canvas.DrawRect(Color.White, elements[j].Id * Global.Width, 0);
                     elements[j + 1].Value = elements[j].Value;
                     Global.Canvas.DrawRect(Color.Blue, elements[j + 1].Id * Global.Width, Global.MaxHeight - elements[j + 1].Value);
                     Global.Canvas.DrawRect(Color.Blue, elements[j].Id * Global.Width, Global.MaxHeight - elements[j].Value);
-                    Thread.Sleep(15);
+                    Thread.Sleep(Global.CompareDelayMs);
                     Global.Canvas.DrawRect(Color.Black, elements[j + 1].Id * Global.Width, Global.MaxHeight - elements[j + 1].Value);
                     Global.Canvas.DrawRect(Color.Black, elements[j].Id * Global.Width, Global.MaxHeight - elements[j].Value);
                     j--;
