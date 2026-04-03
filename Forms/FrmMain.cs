@@ -11,130 +11,132 @@ namespace SortingVisualizer
 {
     public partial class FrmMain : Form
     {
-        SortElement[] _heights;
-        Thread _currentThread;
+        private const int BarWidth = 5;
+
+        private SortElement[] _elements;
+        private Thread _currentThread;
+        private Canvas _canvas;
+        private Graphics _graphics;
+        private CancellationTokenSource _cts = new CancellationTokenSource();
+
         public FrmMain()
         {
             InitializeComponent();
         }
+
         /// <summary>
         /// Initialize general window's settings
         /// </summary>
-        public void InitWindowSettings()
+        private void InitWindowSettings()
         {
             this.MaximizeBox = false;
             this.MinimizeBox = false;
         }
+
         /// <summary>
-        /// Initialize global app's parameters
+        /// Initialize canvas and array parameters
         /// </summary>
-        public void InitParameters()
+        private void InitParameters()
         {
-            Global.Graphics?.Dispose();
-            Global.Graphics = pnlCanvas.CreateGraphics();
-            Global.MaxHeight = pnlCanvas.Height;
-            Global.MaxWidth = pnlCanvas.Width;
-            Global.Width = Global.BarWidth;
-            Global.Canvas = new Canvas();
-            Global.MaxEntities = Global.MaxWidth / Global.Width;
-            this._heights = new SortElement[Global.MaxEntities];
+            _graphics?.Dispose();
+            _graphics = pnlCanvas.CreateGraphics();
+            _canvas = new Canvas(_graphics, BarWidth, pnlCanvas.Height);
+            _elements = new SortElement[pnlCanvas.Width / BarWidth];
         }
-        /// <summary>
-        /// Generates a random number from 0 to the maximum window height
-        /// </summary>
-        /// <param name="rand">The random number that has been generated</param>
-        /// <returns>Returns a random number</returns>
-        public int GenRandomNumber(Random rand)
-        {
-            return rand.Next(0, Global.MaxHeight);
-        }
+
         /// <summary>
         /// Enables all sorting buttons on the window
         /// </summary>
-        public void EnableSortButtons()
+        private void EnableSortButtons()
         {
             btnQuickSort.Enabled = true;
             btnMergeSort.Enabled = true;
             btnInsertionSort.Enabled = true;
         }
+
         /// <summary>
         /// Disables all sorting buttons on the window
         /// </summary>
-        public void DisableSortButtons()
+        private void DisableSortButtons()
         {
             btnQuickSort.Enabled = false;
             btnMergeSort.Enabled = false;
-            btnInsertionSort.Enabled= false;
+            btnInsertionSort.Enabled = false;
         }
+
         /// <summary>
-        /// Clears all active threads
+        /// Cancels any running sort and creates a fresh CancellationTokenSource
         /// </summary>
-        public void ClearThread()
+        private void ClearThread()
         {
-            if (Global.Cts != null)
-            {
-                Global.Cts.Cancel();
-                _currentThread?.Join(500);
-                Global.Cts.Dispose();
-            }
-            Global.Cts = new CancellationTokenSource();
+            _cts.Cancel();
+            _currentThread?.Join(500);
+            _cts.Dispose();
+            _cts = new CancellationTokenSource();
         }
-        public void FrmMain_Load(object sender, EventArgs e)
+
+        private void FrmMain_Load(object sender, EventArgs e)
         {
             InitWindowSettings();
             DisableSortButtons();
         }
-        public void exitToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-        public void githubToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void githubToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start(new ProcessStartInfo("https://github.com/Kvble/sorting-visualizer") { UseShellExecute = true });
         }
+
         private void linkedInToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start(new ProcessStartInfo("https://www.linkedin.com/in/kevin-xavier-andrade-125b9b174/") { UseShellExecute = true });
         }
-        public void btnGenerateArray_Click(object sender, EventArgs e)
+
+        private void btnGenerateArray_Click(object sender, EventArgs e)
         {
             EnableSortButtons();
-            InitParameters();
             ClearThread();
+            InitParameters();
 
-            Global.Canvas.ClearCanvas(Global.MaxWidth, Global.MaxHeight);
-            Random rand = new Random();
-            for (int i = 0; i < Global.MaxEntities; i++)
+            _canvas.ClearCanvas(pnlCanvas.Width, pnlCanvas.Height);
+            var rand = new Random();
+            for (int i = 0; i < _elements.Length; i++)
             {
-                int randomHeight = GenRandomNumber(rand);
-                this._heights[i] = new SortElement(i, randomHeight);
-                Global.Canvas.DrawRect(Color.Black, i * Global.Width, Global.MaxHeight - randomHeight);
+                int randomHeight = rand.Next(0, pnlCanvas.Height);
+                _elements[i] = new SortElement(i, randomHeight);
+                _canvas.DrawRect(Color.Black, i * BarWidth, pnlCanvas.Height - randomHeight);
             }
         }
+
         private void StartSort(ISortAlgorithm algorithm)
         {
             DisableSortButtons();
-            var token = Global.Cts.Token;
+            var token = _cts.Token;
             _currentThread = new Thread(() =>
             {
-                algorithm.Sort(this._heights, token);
+                algorithm.Sort(_elements, token);
             });
             _currentThread.IsBackground = true;
             _currentThread.Start();
         }
-        public void btnMergeSort_Click(object sender, EventArgs e)
+
+        private void btnMergeSort_Click(object sender, EventArgs e)
         {
-            StartSort(new MergeSort());
-        }
-        public void btnQuickSort_Click(object sender, EventArgs e)
-        {
-            StartSort(new QuickSort());
-        }
-        public void btnInsertionSort_Click(object sender, EventArgs e)
-        {
-            StartSort(new InsertionSort());
+            StartSort(new MergeSort(_canvas));
         }
 
+        private void btnQuickSort_Click(object sender, EventArgs e)
+        {
+            StartSort(new QuickSort(_canvas));
+        }
 
+        private void btnInsertionSort_Click(object sender, EventArgs e)
+        {
+            StartSort(new InsertionSort(_canvas));
+        }
     }
 }

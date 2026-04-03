@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+using System.Drawing;
 using System.Threading;
 using SortingVisualizer.Interfaces;
 using SortingVisualizer.Models;
@@ -7,38 +7,46 @@ namespace SortingVisualizer.Utility
 {
     class QuickSort : ISortAlgorithm
     {
-        public QuickSort() { }
+        private readonly ICanvas _canvas;
+
+        public QuickSort(ICanvas canvas)
+        {
+            _canvas = canvas;
+        }
+
         public void Sort(SortElement[] elements, CancellationToken token)
         {
             QuickSortHelper(elements, 0, elements.Length - 1, token);
         }
+
         private void QuickSortHelper(SortElement[] elements, int low, int high, CancellationToken token)
         {
             if (token.IsCancellationRequested) return;
             if (low < high)
             {
                 int pi = QuickSortPartition(elements, low, high, token);
-
                 QuickSortHelper(elements, low, pi, token);
                 QuickSortHelper(elements, pi + 1, high, token);
             }
         }
-        void Swap(ref SortElement a, ref SortElement b)
+
+        private void Swap(ref SortElement a, ref SortElement b)
         {
-            Global.Canvas.DrawRect(Color.Red, a.Id * Global.Width, Global.MaxHeight - a.Value);
-            Global.Canvas.DrawRect(Color.Red, b.Id * Global.Width, Global.MaxHeight - b.Value);
-            Thread.Sleep(Global.CompareDelayMs);
-            Global.Canvas.DrawRect(Color.White, a.Id * Global.Width, 0);
-            Global.Canvas.DrawRect(Color.White, b.Id * Global.Width, 0);
+            _canvas.DrawRect(Color.Red, a.Id * _canvas.BarWidth, _canvas.MaxHeight - a.Value);
+            _canvas.DrawRect(Color.Red, b.Id * _canvas.BarWidth, _canvas.MaxHeight - b.Value);
+            Thread.Sleep(_canvas.CompareDelayMs);
+            _canvas.DrawRect(Color.White, a.Id * _canvas.BarWidth, 0);
+            _canvas.DrawRect(Color.White, b.Id * _canvas.BarWidth, 0);
             int t = a.Value;
             a.Value = b.Value;
             b.Value = t;
-            Global.Canvas.DrawRect(Color.Blue, a.Id * Global.Width, Global.MaxHeight - a.Value);
-            Global.Canvas.DrawRect(Color.Blue, b.Id * Global.Width, Global.MaxHeight - b.Value);
-            Thread.Sleep(Global.SwapDelayMs);
-            Global.Canvas.DrawRect(Color.Black, a.Id * Global.Width, Global.MaxHeight - a.Value);
-            Global.Canvas.DrawRect(Color.Black, b.Id * Global.Width, Global.MaxHeight - b.Value);
+            _canvas.DrawRect(Color.Blue, a.Id * _canvas.BarWidth, _canvas.MaxHeight - a.Value);
+            _canvas.DrawRect(Color.Blue, b.Id * _canvas.BarWidth, _canvas.MaxHeight - b.Value);
+            Thread.Sleep(_canvas.SwapDelayMs);
+            _canvas.DrawRect(Color.Black, a.Id * _canvas.BarWidth, _canvas.MaxHeight - a.Value);
+            _canvas.DrawRect(Color.Black, b.Id * _canvas.BarWidth, _canvas.MaxHeight - b.Value);
         }
+
         private int QuickSortPartition(SortElement[] elements, int low, int high, CancellationToken token)
         {
             SortElement pivot = elements[low];
@@ -55,7 +63,7 @@ namespace SortingVisualizer.Utility
                 {
                     i = i + 1;
                 } while (!token.IsCancellationRequested && elements[i].Value < pivot.Value);
-                if(i < j)
+                if (i < j)
                 {
                     Swap(ref elements[i], ref elements[j]);
                 }

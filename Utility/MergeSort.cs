@@ -1,22 +1,27 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Drawing;
 using System.Threading;
 using SortingVisualizer.Interfaces;
-using System;
 using SortingVisualizer.Models;
 
 namespace SortingVisualizer.Utility
 {
     class MergeSort : ISortAlgorithm
     {
-        public MergeSort(){}
+        private readonly ICanvas _canvas;
+
+        public MergeSort(ICanvas canvas)
+        {
+            _canvas = canvas;
+        }
 
         public void Sort(SortElement[] elements, CancellationToken token)
         {
             var sorted = MergeSortHelper(elements, token);
             if (token.IsCancellationRequested) return;
-            System.Array.Copy(sorted, elements, elements.Length);
+            Array.Copy(sorted, elements, elements.Length);
         }
 
         private SortElement[] MergeSortHelper(SortElement[] elements, CancellationToken token)
@@ -34,7 +39,7 @@ namespace SortingVisualizer.Utility
                 leftSide = new SortElement[half];
                 rightSide = new SortElement[half];
                 int index = half;
-                for (int i = 0; i < half;  i++)
+                for (int i = 0; i < half; i++)
                 {
                     leftSide[i] = elements[i];
                     rightSide[i] = elements[index];
@@ -46,7 +51,7 @@ namespace SortingVisualizer.Utility
                 leftSide = new SortElement[half + 1];
                 rightSide = new SortElement[half];
                 for (int i = 0; i < half + 1; i++)
-               {
+                {
                     leftSide[i] = elements[i];
                 }
                 int index = half + 1;
@@ -62,7 +67,7 @@ namespace SortingVisualizer.Utility
             rightSide = MergeSortHelper(rightSide, token);
             if (token.IsCancellationRequested) return rightSide;
 
-            return this.MergeSortProcess(leftSide.ToList(), rightSide.ToList(), token);
+            return MergeSortProcess(leftSide.ToList(), rightSide.ToList(), token);
         }
 
         private SortElement[] MergeSortProcess(List<SortElement> left, List<SortElement> right, CancellationToken token)
@@ -74,9 +79,9 @@ namespace SortingVisualizer.Utility
             while (left.Count > 0 && right.Count > 0)
             {
                 if (token.IsCancellationRequested) return result.ToArray();
-                Global.Canvas.DrawRect(Color.Red, left.First().Id * Global.Width, Global.MaxHeight - left.First().Value);
-                Global.Canvas.DrawRect(Color.Red, right.First().Id * Global.Width, Global.MaxHeight - right.First().Value);
-                Thread.Sleep(Global.CompareDelayMs);
+                _canvas.DrawRect(Color.Red, left.First().Id * _canvas.BarWidth, _canvas.MaxHeight - left.First().Value);
+                _canvas.DrawRect(Color.Red, right.First().Id * _canvas.BarWidth, _canvas.MaxHeight - right.First().Value);
+                Thread.Sleep(_canvas.CompareDelayMs);
                 if (left.First().Value <= right.First().Value)
                     MoveValueFromSourceToResult(left, result, index, right, false, true);
                 else
@@ -103,33 +108,33 @@ namespace SortingVisualizer.Utility
 
         private void MoveValueFromSourceToResult(List<SortElement> source, List<SortElement> result, int index, List<SortElement> compared, bool isChanging, bool isSourceLeft)
         {
-            Global.Canvas.DrawRect(Color.White, source.First().Id * Global.Width, 0);
+            _canvas.DrawRect(Color.White, source.First().Id * _canvas.BarWidth, 0);
             if (compared.Count > 0)
             {
-                if(isChanging)
+                if (isChanging)
                 {
-                    Global.Canvas.DrawRect(Color.White, compared.First().Id * Global.Width, 0);
+                    _canvas.DrawRect(Color.White, compared.First().Id * _canvas.BarWidth, 0);
                     if (isSourceLeft)
                     {
                         for (int i = 1; i < source.Count; i++)
                         {
                             source[i].Id++;
-                            Global.Canvas.DrawRect(Color.White, source[i].Id * Global.Width, 0);
-                            Global.Canvas.DrawRect(Color.Black, source[i].Id * Global.Width, Global.MaxHeight - source[i].Value);
+                            _canvas.DrawRect(Color.White, source[i].Id * _canvas.BarWidth, 0);
+                            _canvas.DrawRect(Color.Black, source[i].Id * _canvas.BarWidth, _canvas.MaxHeight - source[i].Value);
                         }
                     }
                     for (int i = 0; i < compared.Count; i++)
                     {
                         compared[i].Id++;
-                        Global.Canvas.DrawRect(Color.White, compared[i].Id * Global.Width, 0);
-                        Global.Canvas.DrawRect(Color.Black, compared[i].Id * Global.Width, Global.MaxHeight - compared[i].Value);
+                        _canvas.DrawRect(Color.White, compared[i].Id * _canvas.BarWidth, 0);
+                        _canvas.DrawRect(Color.Black, compared[i].Id * _canvas.BarWidth, _canvas.MaxHeight - compared[i].Value);
                     }
                 }
             }
             source.First().Id = index;
-            Global.Canvas.DrawRect(Color.Blue, source.First().Id * Global.Width, Global.MaxHeight - source.First().Value);
-            Thread.Sleep(Global.SwapDelayMs);
-            Global.Canvas.DrawRect(Color.Black, source.First().Id * Global.Width, Global.MaxHeight - source.First().Value);
+            _canvas.DrawRect(Color.Blue, source.First().Id * _canvas.BarWidth, _canvas.MaxHeight - source.First().Value);
+            Thread.Sleep(_canvas.SwapDelayMs);
+            _canvas.DrawRect(Color.Black, source.First().Id * _canvas.BarWidth, _canvas.MaxHeight - source.First().Value);
             result.Add(source.First());
             source.RemoveAt(0);
         }
