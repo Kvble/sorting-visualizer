@@ -15,6 +15,6 @@ namespace SortingVisualizer.Utility
         public static Graphics Graphics;
         public static Canvas Canvas;
         public static int MaxEntities;
-        public static CancellationTokenSource Cts;
+        public static CancellationTokenSource Cts = new CancellationTokenSource();
     }
 }

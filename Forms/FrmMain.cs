@@ -30,6 +30,7 @@ namespace SortingVisualizer
         /// </summary>
         public void InitParameters()
         {
+            Global.Graphics?.Dispose();
             Global.Graphics = pnlCanvas.CreateGraphics();
             Global.MaxHeight = pnlCanvas.Height;
             Global.MaxWidth = pnlCanvas.Width;

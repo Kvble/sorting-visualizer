@@ -50,11 +50,11 @@ namespace SortingVisualizer.Utility
                 do
                 {
                     j = j - 1;
-                } while (heights[j].Value > pivot.Value);
+                } while (!token.IsCancellationRequested && heights[j].Value > pivot.Value);
                 do
                 {
                     i = i + 1;
-                } while (heights[i].Value < pivot.Value);
+                } while (!token.IsCancellationRequested && heights[i].Value < pivot.Value);
                 if(i < j)
                 {
                     Swap(ref heights[i], ref heights[j]);
