@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Threading;
 
 namespace SortingVisualizer.Utility
 {
@@ -10,5 +11,6 @@ namespace SortingVisualizer.Utility
         public static Graphics Graphics;
         public static Canvas Canvas;
         public static int maxEntities;
+        public static CancellationTokenSource Cts;
     }
 }

@@ -69,10 +69,12 @@ namespace SortingVisualizer
         /// </summary>
         public void clearThread()
         {
-            if (currentThread != null)
+            if (Global.Cts != null)
             {
-                currentThread.Abort();
+                Global.Cts.Cancel();
+                Global.Cts.Dispose();
             }
+            Global.Cts = new CancellationTokenSource();
         }
         public void FrmMain_Load(object sender, EventArgs e)
         {
@@ -109,9 +111,10 @@ namespace SortingVisualizer
         {
             disableSortButtons();
             MergeSort merge = new MergeSort();
+            var token = Global.Cts.Token;
             currentThread = new Thread(() =>
             {
-                this.heights = merge.MergeSortHelper(this.heights);
+                this.heights = merge.MergeSortHelper(this.heights, token);
             });
             currentThread.IsBackground = true;
             currentThread.Start();
@@ -120,9 +123,10 @@ namespace SortingVisualizer
         {
             disableSortButtons();
             QuickSort quick = new QuickSort();
+            var token = Global.Cts.Token;
             currentThread = new Thread(() =>
             {
-                quick.QuickSortHelper(this.heights, 0, this.heights.Length - 1);
+                quick.QuickSortHelper(this.heights, 0, this.heights.Length - 1, token);
             });
             currentThread.IsBackground = true;
             currentThread.Start();
@@ -132,9 +136,10 @@ namespace SortingVisualizer
             printArray();
             disableSortButtons();
             InsertionSort insertion = new InsertionSort();
+            var token = Global.Cts.Token;
             currentThread = new Thread(() =>
             {
-                insertion.InsertionSortProcess(this.heights);
+                insertion.InsertionSortProcess(this.heights, token);
                 printArray();
             });
             currentThread.IsBackground = true;

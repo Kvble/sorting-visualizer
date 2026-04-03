@@ -7,14 +7,15 @@ namespace SortingVisualizer.Utility
     class QuickSort
     {
         public QuickSort() { }
-        public void QuickSortHelper(Height[] heights, int low, int high)
+        public void QuickSortHelper(Height[] heights, int low, int high, CancellationToken token)
         {
+            if (token.IsCancellationRequested) return;
             if (low < high)
             {
-                int pi = QuickSortPartition(heights, low, high);
+                int pi = QuickSortPartition(heights, low, high, token);
 
-                QuickSortHelper(heights, low, pi);
-                QuickSortHelper(heights, pi + 1, high);
+                QuickSortHelper(heights, low, pi, token);
+                QuickSortHelper(heights, pi + 1, high, token);
             }
         }
         void Swap(ref Height a, ref Height b)
@@ -33,13 +34,14 @@ namespace SortingVisualizer.Utility
             Global.Canvas.drawRect(Color.Black, a.Id * Global.Width, Global.MaxHeight - a.Value);
             Global.Canvas.drawRect(Color.Black, b.Id * Global.Width, Global.MaxHeight - b.Value);
         }
-        public int QuickSortPartition(Height[] heights, int low, int high)
+        public int QuickSortPartition(Height[] heights, int low, int high, CancellationToken token)
         {
             Height pivot = heights[low];
             int i = (low - 1);
             int j = (high + 1);
             do
             {
+                if (token.IsCancellationRequested) return j;
                 do
                 {
                     j = j - 1;

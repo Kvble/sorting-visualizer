@@ -11,11 +11,12 @@ namespace SortingVisualizer.Utility
     {
         public MergeSort(){}
 
-        public Height[] MergeSortHelper(Height[] height)
+        public Height[] MergeSortHelper(Height[] height, CancellationToken token)
         {
             int half = height.Length / 2;
-            
+
             if (height.Length <= 1) return height;
+            if (token.IsCancellationRequested) return height;
 
             Height[] leftSide;
             Height[] rightSide;
@@ -48,18 +49,19 @@ namespace SortingVisualizer.Utility
                 }
             }
 
-            leftSide = MergeSortHelper(leftSide);
-            rightSide = MergeSortHelper(rightSide);
+            leftSide = MergeSortHelper(leftSide, token);
+            rightSide = MergeSortHelper(rightSide, token);
 
-            return this.MergeSortProcess(leftSide.ToList(), rightSide.ToList());
+            return this.MergeSortProcess(leftSide.ToList(), rightSide.ToList(), token);
         }
 
-        public Height[] MergeSortProcess(List<Height> left, List<Height> right)
+        public Height[] MergeSortProcess(List<Height> left, List<Height> right, CancellationToken token)
         {
             var result = new List<Height>();
             int index = left.First().Id;
             while (SortUtil.NotEmpty(left) && SortUtil.NotEmpty(right))
             {
+                if (token.IsCancellationRequested) return result.ToArray();
                 Global.Canvas.drawRect(Color.Red, left.First().Id * Global.Width, Global.MaxHeight - left.First().Value);
                 Global.Canvas.drawRect(Color.Red, right.First().Id * Global.Width, Global.MaxHeight - right.First().Value);
                 Thread.Sleep(15);
@@ -73,12 +75,14 @@ namespace SortingVisualizer.Utility
 
             while (SortUtil.NotEmpty(left))
             {
+                if (token.IsCancellationRequested) return result.ToArray();
                 MoveValueFromSourceToResult(left, result, index, right, false, true);
                 index++;
             }
 
             while (SortUtil.NotEmpty(right))
             {
+                if (token.IsCancellationRequested) return result.ToArray();
                 MoveValueFromSourceToResult(right, result, index, left, false, false);
                 index++;
             }
