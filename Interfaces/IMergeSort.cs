@@ -6,8 +6,8 @@ namespace SortingVisualizer.Interfaces
 {
     internal interface IMergeSort
     {
-        Height[] MergeSortHelper(Height[] height, CancellationToken token);
-        Height[] MergeSortProcess(List<Height> left, List<Height> right, CancellationToken token);
-        void MoveValueFromSourceToResult(List<Height> source, List<Height> result, int index, List<Height> compared, bool isChanging, bool isSourceLeft);
+        SortElement[] MergeSortHelper(SortElement[] height, CancellationToken token);
+        SortElement[] MergeSortProcess(List<SortElement> left, List<SortElement> right, CancellationToken token);
+        void MoveValueFromSourceToResult(List<SortElement> source, List<SortElement> result, int index, List<SortElement> compared, bool isChanging, bool isSourceLeft);
     }
 }

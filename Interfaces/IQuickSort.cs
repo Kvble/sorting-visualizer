@@ -4,8 +4,8 @@ namespace SortingVisualizer.Interfaces
 {
     internal interface IQuickSort
     {
-        void QuickSortHelper(Height[] heights, int low, int high);
-        void Swap(ref Height a, ref Height b);
-        int QuickSortPartition(Height[] heights, int low, int high);
+        void QuickSortHelper(SortElement[] heights, int low, int high);
+        void Swap(ref SortElement a, ref SortElement b);
+        int QuickSortPartition(SortElement[] heights, int low, int high);
     }
 }

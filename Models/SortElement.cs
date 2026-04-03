@@ -1,10 +1,8 @@
-﻿
-namespace SortingVisualizer.Models
+﻿namespace SortingVisualizer.Models
 {
-    class Height
+    class SortElement
     {
-        public Height() { }
-        public Height(int id, int value)
+        public SortElement(int id, int value)
         {
             this.Id = id;
             this.Value = value;

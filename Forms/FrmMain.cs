@@ -10,7 +10,7 @@ namespace SortingVisualizer
 {
     public partial class FrmMain : Form
     {
-        Height[] heights;
+        SortElement[] heights;
         Thread currentThread;
         public FrmMain()
         {
@@ -35,7 +35,7 @@ namespace SortingVisualizer
             Global.Width = 5;
             Global.Canvas = new Canvas();
             Global.maxEntities = Global.MaxWidth / Global.Width;
-            this.heights = new Height[Global.maxEntities];
+            this.heights = new SortElement[Global.maxEntities];
         }
         /// <summary>
         /// Generates a random number from 0 to the maximum window height
@@ -103,7 +103,7 @@ namespace SortingVisualizer
             for (int i = 0; i < Global.maxEntities; i++)
             {
                 int randomHeight = genRandomNumber(rand);
-                this.heights[i] = new Height(i, randomHeight);
+                this.heights[i] = new SortElement(i, randomHeight);
                 Global.Canvas.drawRect(Color.Black, i * Global.Width, Global.MaxHeight - randomHeight);
             }
         }

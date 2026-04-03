@@ -10,7 +10,7 @@ namespace SortingVisualizer.Utility
         /// </summary>
         /// <param name="list">The list that has to be checked.</param>
         /// <returns>Return true if the List is not empty, false if it's empty.</returns>
-        public static bool NotEmpty(List<Height> list)
+        public static bool NotEmpty(List<SortElement> list)
         {
             return list.Count > 0;
         }

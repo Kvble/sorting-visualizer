@@ -9,7 +9,7 @@ namespace SortingVisualizer.Utility
 {
     internal class InsertionSort : IInsertionSort
     {
-        public void InsertionSortProcess(Height[] heights, CancellationToken token)
+        public void InsertionSortProcess(SortElement[] heights, CancellationToken token)
         {
             for(int i = 1; i < heights.Length; i++)
             {

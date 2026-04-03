@@ -11,20 +11,20 @@ namespace SortingVisualizer.Utility
     {
         public MergeSort(){}
 
-        public Height[] MergeSortHelper(Height[] height, CancellationToken token)
+        public SortElement[] MergeSortHelper(SortElement[] height, CancellationToken token)
         {
             int half = height.Length / 2;
 
             if (height.Length <= 1) return height;
             if (token.IsCancellationRequested) return height;
 
-            Height[] leftSide;
-            Height[] rightSide;
+            SortElement[] leftSide;
+            SortElement[] rightSide;
 
             if (height.Length % 2 == 0)
             {
-                leftSide = new Height[half];
-                rightSide = new Height[half];
+                leftSide = new SortElement[half];
+                rightSide = new SortElement[half];
                 int index = half;
                 for (int i = 0; i < half;  i++)
                 {
@@ -35,8 +35,8 @@ namespace SortingVisualizer.Utility
             }
             else
             {
-                leftSide = new Height[half + 1];
-                rightSide = new Height[half];
+                leftSide = new SortElement[half + 1];
+                rightSide = new SortElement[half];
                 for (int i = 0; i < half + 1; i++)
                {
                     leftSide[i] = height[i];
@@ -55,9 +55,9 @@ namespace SortingVisualizer.Utility
             return this.MergeSortProcess(leftSide.ToList(), rightSide.ToList(), token);
         }
 
-        public Height[] MergeSortProcess(List<Height> left, List<Height> right, CancellationToken token)
+        public SortElement[] MergeSortProcess(List<SortElement> left, List<SortElement> right, CancellationToken token)
         {
-            var result = new List<Height>();
+            var result = new List<SortElement>();
             int index = left.First().Id;
             while (SortUtil.NotEmpty(left) && SortUtil.NotEmpty(right))
             {
@@ -89,7 +89,7 @@ namespace SortingVisualizer.Utility
             return result.ToArray();
         }
 
-        public void MoveValueFromSourceToResult(List<Height> source, List<Height> result, int index, List<Height> compared, bool isChanging, bool isSourceLeft)
+        public void MoveValueFromSourceToResult(List<SortElement> source, List<SortElement> result, int index, List<SortElement> compared, bool isChanging, bool isSourceLeft)
         {
             Global.Canvas.drawRect(Color.White, source.First().Id * Global.Width, 0);
             if (SortUtil.NotEmpty(compared))

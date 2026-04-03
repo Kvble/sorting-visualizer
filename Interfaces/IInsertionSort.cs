@@ -6,6 +6,6 @@ namespace SortingVisualizer.Interfaces
 {
     internal interface IInsertionSort
     {
-        void InsertionSortProcess(Height[] heights, CancellationToken token);
+        void InsertionSortProcess(SortElement[] heights, CancellationToken token);
     }
 }

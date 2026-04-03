@@ -99,7 +99,7 @@
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Utility\Global.cs" />
-    <Compile Include="Models\Height.cs" />
+    <Compile Include="Models\SortElement.cs" />
     <Compile Include="Utility\MergeSort.cs" />
     <Compile Include="Interfaces\ICanvas.cs" />
     <Compile Include="Interfaces\IInsertionSort.cs" />
