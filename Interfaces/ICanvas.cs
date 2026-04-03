@@ -4,7 +4,7 @@ namespace SortingVisualizer.Interfaces
 {
     internal interface ICanvas
     {
-        void clearCanvas(int width, int height);
-        void drawRect(Color color, int xAxis, int yAxis);
+        void ClearCanvas(int width, int height);
+        void DrawRect(Color color, int xAxis, int yAxis);
     }
 }

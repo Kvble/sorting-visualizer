@@ -69,8 +69,8 @@ namespace SortingVisualizer.Utility
             while (SortUtil.NotEmpty(left) && SortUtil.NotEmpty(right))
             {
                 if (token.IsCancellationRequested) return result.ToArray();
-                Global.Canvas.drawRect(Color.Red, left.First().Id * Global.Width, Global.MaxHeight - left.First().Value);
-                Global.Canvas.drawRect(Color.Red, right.First().Id * Global.Width, Global.MaxHeight - right.First().Value);
+                Global.Canvas.DrawRect(Color.Red, left.First().Id * Global.Width, Global.MaxHeight - left.First().Value);
+                Global.Canvas.DrawRect(Color.Red, right.First().Id * Global.Width, Global.MaxHeight - right.First().Value);
                 Thread.Sleep(15);
                 if (left.First().Value <= right.First().Value)
                     MoveValueFromSourceToResult(left, result, index, right, false, true);
@@ -98,33 +98,33 @@ namespace SortingVisualizer.Utility
 
         private void MoveValueFromSourceToResult(List<SortElement> source, List<SortElement> result, int index, List<SortElement> compared, bool isChanging, bool isSourceLeft)
         {
-            Global.Canvas.drawRect(Color.White, source.First().Id * Global.Width, 0);
+            Global.Canvas.DrawRect(Color.White, source.First().Id * Global.Width, 0);
             if (SortUtil.NotEmpty(compared))
             {
                 if(isChanging)
                 {
-                    Global.Canvas.drawRect(Color.White, compared.First().Id * Global.Width, 0);
+                    Global.Canvas.DrawRect(Color.White, compared.First().Id * Global.Width, 0);
                     if (isSourceLeft)
                     {
                         for (int i = 1; i < source.Count; i++)
                         {
                             source[i].Id++;
-                            Global.Canvas.drawRect(Color.White, source[i].Id * Global.Width, 0);
-                            Global.Canvas.drawRect(Color.Black, source[i].Id * Global.Width, Global.MaxHeight - source[i].Value);
+                            Global.Canvas.DrawRect(Color.White, source[i].Id * Global.Width, 0);
+                            Global.Canvas.DrawRect(Color.Black, source[i].Id * Global.Width, Global.MaxHeight - source[i].Value);
                         }
                     }
                     for (int i = 0; i < compared.Count; i++)
                     {
                         compared[i].Id++;
-                        Global.Canvas.drawRect(Color.White, compared[i].Id * Global.Width, 0);
-                        Global.Canvas.drawRect(Color.Black, compared[i].Id * Global.Width, Global.MaxHeight - compared[i].Value);
+                        Global.Canvas.DrawRect(Color.White, compared[i].Id * Global.Width, 0);
+                        Global.Canvas.DrawRect(Color.Black, compared[i].Id * Global.Width, Global.MaxHeight - compared[i].Value);
                     }
                 }
             }
             source.First().Id = index;
-            Global.Canvas.drawRect(Color.Blue, source.First().Id * Global.Width, Global.MaxHeight - source.First().Value);
+            Global.Canvas.DrawRect(Color.Blue, source.First().Id * Global.Width, Global.MaxHeight - source.First().Value);
             Thread.Sleep(5);
-            Global.Canvas.drawRect(Color.Black, source.First().Id * Global.Width, Global.MaxHeight - source.First().Value);
+            Global.Canvas.DrawRect(Color.Black, source.First().Id * Global.Width, Global.MaxHeight - source.First().Value);
             result.Add(source.First());
             source.RemoveAt(0);
         }

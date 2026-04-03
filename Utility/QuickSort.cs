@@ -25,19 +25,19 @@ namespace SortingVisualizer.Utility
         }
         void Swap(ref SortElement a, ref SortElement b)
         {
-            Global.Canvas.drawRect(Color.Red, a.Id * Global.Width, Global.MaxHeight - a.Value);
-            Global.Canvas.drawRect(Color.Red, b.Id * Global.Width, Global.MaxHeight - b.Value);
+            Global.Canvas.DrawRect(Color.Red, a.Id * Global.Width, Global.MaxHeight - a.Value);
+            Global.Canvas.DrawRect(Color.Red, b.Id * Global.Width, Global.MaxHeight - b.Value);
             Thread.Sleep(15);
-            Global.Canvas.drawRect(Color.White, a.Id * Global.Width, 0);
-            Global.Canvas.drawRect(Color.White, b.Id * Global.Width, 0);
+            Global.Canvas.DrawRect(Color.White, a.Id * Global.Width, 0);
+            Global.Canvas.DrawRect(Color.White, b.Id * Global.Width, 0);
             int t = a.Value;
             a.Value = b.Value;
             b.Value = t;
-            Global.Canvas.drawRect(Color.Blue, a.Id * Global.Width, Global.MaxHeight - a.Value);
-            Global.Canvas.drawRect(Color.Blue, b.Id * Global.Width, Global.MaxHeight - b.Value);
+            Global.Canvas.DrawRect(Color.Blue, a.Id * Global.Width, Global.MaxHeight - a.Value);
+            Global.Canvas.DrawRect(Color.Blue, b.Id * Global.Width, Global.MaxHeight - b.Value);
             Thread.Sleep(5);
-            Global.Canvas.drawRect(Color.Black, a.Id * Global.Width, Global.MaxHeight - a.Value);
-            Global.Canvas.drawRect(Color.Black, b.Id * Global.Width, Global.MaxHeight - b.Value);
+            Global.Canvas.DrawRect(Color.Black, a.Id * Global.Width, Global.MaxHeight - a.Value);
+            Global.Canvas.DrawRect(Color.Black, b.Id * Global.Width, Global.MaxHeight - b.Value);
         }
         private int QuickSortPartition(SortElement[] heights, int low, int high, CancellationToken token)
         {

@@ -10,7 +10,7 @@ namespace SortingVisualizer.Utility
         public static int MaxWidth;
         public static Graphics Graphics;
         public static Canvas Canvas;
-        public static int maxEntities;
+        public static int MaxEntities;
         public static CancellationTokenSource Cts;
     }
 }

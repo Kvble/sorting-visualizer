@@ -8,7 +8,7 @@ namespace SortingVisualizer.Utility
         private static readonly object _drawLock = new object();
 
         public Canvas() {}
-        public void clearCanvas(int width, int height)
+        public void ClearCanvas(int width, int height)
         {
             lock (_drawLock)
             {
@@ -18,7 +18,7 @@ namespace SortingVisualizer.Utility
                 }
             }
         }
-        public void drawRect(Color color, int xAxis, int yAxis)
+        public void DrawRect(Color color, int xAxis, int yAxis)
         {
             lock (_drawLock)
             {

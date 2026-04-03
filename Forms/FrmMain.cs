@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Diagnostics;
 using System.Windows.Forms;
@@ -11,8 +11,8 @@ namespace SortingVisualizer
 {
     public partial class FrmMain : Form
     {
-        SortElement[] heights;
-        Thread currentThread;
+        SortElement[] _heights;
+        Thread _currentThread;
         public FrmMain()
         {
             InitializeComponent();
@@ -20,7 +20,7 @@ namespace SortingVisualizer
         /// <summary>
         /// Initialize general window's settings
         /// </summary>
-        public void initWindowSettings()
+        public void InitWindowSettings()
         {
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -28,38 +28,38 @@ namespace SortingVisualizer
         /// <summary>
         /// Initialize global app's parameters
         /// </summary>
-        public void initParameters()
+        public void InitParameters()
         {
             Global.Graphics = pnlCanvas.CreateGraphics();
             Global.MaxHeight = pnlCanvas.Height;
             Global.MaxWidth = pnlCanvas.Width;
             Global.Width = 5;
             Global.Canvas = new Canvas();
-            Global.maxEntities = Global.MaxWidth / Global.Width;
-            this.heights = new SortElement[Global.maxEntities];
+            Global.MaxEntities = Global.MaxWidth / Global.Width;
+            this._heights = new SortElement[Global.MaxEntities];
         }
         /// <summary>
         /// Generates a random number from 0 to the maximum window height
         /// </summary>
         /// <param name="rand">The random number that has been generated</param>
         /// <returns>Returns a random number</returns>
-        public int genRandomNumber(Random rand)
+        public int GenRandomNumber(Random rand)
         {
             return rand.Next(0, Global.MaxHeight);
         }
         /// <summary>
         /// Enables all sorting buttons on the window
         /// </summary>
-        public void enableSortButtons()
+        public void EnableSortButtons()
         {
             btnQuickSort.Enabled = true;
             btnMergeSort.Enabled = true;
             btnInsertionSort.Enabled = true;
         }
         /// <summary>
-        /// Disables all sorting buttons oon the window
+        /// Disables all sorting buttons on the window
         /// </summary>
-        public void disableSortButtons()
+        public void DisableSortButtons()
         {
             btnQuickSort.Enabled = false;
             btnMergeSort.Enabled = false;
@@ -68,7 +68,7 @@ namespace SortingVisualizer
         /// <summary>
         /// Clears all active threads
         /// </summary>
-        public void clearThread()
+        public void ClearThread()
         {
             if (Global.Cts != null)
             {
@@ -79,7 +79,7 @@ namespace SortingVisualizer
         }
         public void FrmMain_Load(object sender, EventArgs e)
         {
-            initWindowSettings();
+            InitWindowSettings();
         }
         public void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -95,29 +95,29 @@ namespace SortingVisualizer
         }
         public void btnGenerateArray_Click(object sender, EventArgs e)
         {
-            enableSortButtons();
-            initParameters();
-            clearThread();
+            EnableSortButtons();
+            InitParameters();
+            ClearThread();
 
-            Global.Canvas.clearCanvas(Global.MaxWidth, Global.MaxHeight);
+            Global.Canvas.ClearCanvas(Global.MaxWidth, Global.MaxHeight);
             Random rand = new Random();
-            for (int i = 0; i < Global.maxEntities; i++)
+            for (int i = 0; i < Global.MaxEntities; i++)
             {
-                int randomHeight = genRandomNumber(rand);
-                this.heights[i] = new SortElement(i, randomHeight);
-                Global.Canvas.drawRect(Color.Black, i * Global.Width, Global.MaxHeight - randomHeight);
+                int randomHeight = GenRandomNumber(rand);
+                this._heights[i] = new SortElement(i, randomHeight);
+                Global.Canvas.DrawRect(Color.Black, i * Global.Width, Global.MaxHeight - randomHeight);
             }
         }
         private void StartSort(ISortAlgorithm algorithm)
         {
-            disableSortButtons();
+            DisableSortButtons();
             var token = Global.Cts.Token;
-            currentThread = new Thread(() =>
+            _currentThread = new Thread(() =>
             {
-                algorithm.Sort(this.heights, token);
+                algorithm.Sort(this._heights, token);
             });
-            currentThread.IsBackground = true;
-            currentThread.Start();
+            _currentThread.IsBackground = true;
+            _currentThread.Start();
         }
         public void btnMergeSort_Click(object sender, EventArgs e)
         {
@@ -129,20 +129,20 @@ namespace SortingVisualizer
         }
         public void btnInsertionSort_Click(object sender, EventArgs e)
         {
-            printArray();
+            PrintArray();
             StartSort(new InsertionSort());
         }
         /// <summary>
-        /// Iterates every element of the array and prints the element's Id and Value 
+        /// Iterates every element of the array and prints the element's Id and Value
         /// </summary>
-        public void printArray()
+        public void PrintArray()
         {
-            foreach (var item in this.heights)
+            foreach (var item in this._heights)
             {
                 Console.WriteLine($"Id: {item.Id} | Value: {item.Value}\n");
             }
         }
 
-        
+
     }
 }
